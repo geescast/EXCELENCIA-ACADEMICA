@@ -9,80 +9,115 @@
       --ipn-guinda: #6C1D45;
       --ipn-guinda-dark: #4A122E;
       --ipn-gold: #D4AF37;
-      --bg: #F8F9FA;
+      --bg: #F4F6F9;
+      --card-bg: #FFFFFF;
+      --border: #DDE2E5;
+      --text: #2D3748;
     }
-    * { box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, sans-serif; margin: 0; padding: 0; }
-    body { background-color: var(--bg); color: #333; }
+    * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
+    body { background-color: var(--bg); color: var(--text); line-height: 1.5; padding-bottom: 50px; }
+    
     header {
       background: linear-gradient(135deg, var(--ipn-guinda) 0%, var(--ipn-guinda-dark) 100%);
-      color: white; padding: 20px; text-align: center; border-bottom: 4px solid var(--ipn-gold);
+      color: white; padding: 25px 20px; text-align: center; border-bottom: 4px solid var(--ipn-gold);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
-    header h1 { font-size: 1.4rem; letter-spacing: 0.5px; }
-    header p { font-size: 0.95rem; opacity: 0.9; margin-top: 5px; }
-    .container { max-width: 960px; margin: 30px auto; background: white; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); overflow: hidden; }
-    .card { padding: 30px; }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
-    .grid-4 { display: grid; grid-template-columns: 2fr 1fr 1fr 2fr; gap: 15px; }
-    .form-group { margin-bottom: 15px; display: flex; flex-direction: column; }
-    label { font-size: 0.82rem; font-weight: 700; color: #444; margin-bottom: 5px; text-transform: uppercase; }
+    header h1 { font-size: 1.5rem; letter-spacing: 0.5px; font-weight: 800; text-transform: uppercase; }
+    header p { font-size: 0.95rem; opacity: 0.92; margin-top: 6px; }
+
+    .container { max-width: 980px; margin: 30px auto; background: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); overflow: hidden; border: 1px solid var(--border); }
+    .card { padding: 35px; }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: 2fr 1fr 1fr 2fr; gap: 16px; }
+
+    @media (max-width: 768px) {
+      .grid-4 { grid-template-columns: 1fr; }
+      .grid-3, .grid-2 { grid-template-columns: 1fr; }
+      .card { padding: 20px; }
+    }
+
+    .form-group { margin-bottom: 16px; display: flex; flex-direction: column; }
+    label { font-size: 0.8rem; font-weight: 700; color: #4A5568; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.3px; }
     input, select {
-      padding: 10px 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 0.95rem; transition: border-color 0.2s;
+      padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 6px; font-size: 0.95rem; color: #2D3748; transition: all 0.2s;
     }
-    input:focus, select:focus { border-color: var(--ipn-guinda); outline: none; }
+    input:focus, select:focus { border-color: var(--ipn-guinda); outline: none; box-shadow: 0 0 0 3px rgba(108, 29, 69, 0.15); }
+    input[readonly] { background-color: #EDF2F7; cursor: not-allowed; color: #4A5568; font-weight: 600; }
+
     .section-title {
-      font-size: 1.05rem; font-weight: 700; color: var(--ipn-guinda); border-bottom: 2px solid #EEE;
-      padding-bottom: 8px; margin: 25px 0 15px 0; display: flex; align-items: center; gap: 8px;
+      font-size: 1.05rem; font-weight: 700; color: var(--ipn-guinda); border-bottom: 2px solid #EDF2F7;
+      padding-bottom: 8px; margin: 30px 0 18px 0; display: flex; align-items: center; gap: 8px;
     }
+    .badge {
+      background: var(--ipn-guinda); color: white; border-radius: 50%; width: 24px; height: 24px;
+      display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem;
+    }
+
     .file-drop {
-      border: 2px dashed #BDBDBD; padding: 15px; border-radius: 6px; text-align: center;
-      background: #FAFAFA; cursor: pointer; transition: 0.2s;
+      border: 2px dashed #CBD5E0; padding: 18px; border-radius: 8px; text-align: center;
+      background: #F7FAFC; transition: 0.2s;
     }
     .file-drop:hover { border-color: var(--ipn-guinda); background: #FFF5F8; }
+    .file-drop input { border: none; background: transparent; padding: 0; width: 100%; cursor: pointer; }
+
     .btn-submit {
-      background: var(--ipn-guinda); color: white; border: none; padding: 14px 28px;
-      font-size: 1rem; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%;
-      margin-top: 25px; transition: background 0.2s;
+      background: var(--ipn-guinda); color: white; border: none; padding: 15px 30px;
+      font-size: 1.05rem; font-weight: 700; border-radius: 6px; cursor: pointer; width: 100%;
+      margin-top: 30px; transition: background 0.2s; box-shadow: 0 4px 10px rgba(108, 29, 69, 0.3);
     }
     .btn-submit:hover { background: var(--ipn-guinda-dark); }
-    #login-box { max-width: 420px; margin: 60px auto; padding: 35px; border-radius: 8px; background: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+
+    #login-box {
+      max-width: 440px; margin: 60px auto; padding: 35px; border-radius: 10px; background: white;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08); border: 1px solid var(--border);
+    }
+    .alert-banner {
+      background: #EBF8FF; border-left: 4px solid #3182CE; padding: 14px; border-radius: 6px;
+      margin-bottom: 24px; font-size: 0.92rem; color: #2B6CB0;
+    }
+    .error-msg { color: #E53E3E; font-size: 0.85rem; margin-top: 8px; display: none; font-weight: 600; }
   </style>
 </head>
 <body>
 
   <header>
     <h1>INSTITUTO POLITÉCNICO NACIONAL</h1>
-    <p>Portal de Registro para Personas Candidatas al Premio a la Excelencia Académica 2026</p>
+    <p>Escuela Superior de Comercio y Administración — Unidad Santo Tomás</p>
+    <p style="font-weight: 600; font-size: 0.9rem; color: var(--ipn-gold); margin-top: 4px;">Premio a la Excelencia Académica 2026</p>
   </header>
 
-  <!-- VISTA 1: LOGIN -->
+  <!-- VISTA 1: ACCESO -->
   <div id="login-box">
-    <h2 style="color: var(--ipn-guinda); font-size: 1.25rem; margin-bottom: 8px;">Iniciar Sesión</h2>
-    <p style="font-size: 0.85rem; color: #666; margin-bottom: 20px;">Ingresa con tu Boleta y la contraseña temporal enviada a tu correo.</p>
+    <h2 style="color: var(--ipn-guinda); font-size: 1.3rem; margin-bottom: 6px;">Portal de Registro</h2>
+    <p style="font-size: 0.88rem; color: #718096; margin-bottom: 22px;">Ingresa con tu Boleta y la contraseña temporal enviada a tu correo institucional.</p>
+    
     <form id="form-login" onsubmit="handleLogin(event)">
       <div class="form-group">
-        <label>No. de Boleta</label>
+        <label>Número de Boleta</label>
         <input type="text" id="log-boleta" placeholder="Ej. 2025400051" required maxlength="10">
       </div>
       <div class="form-group">
-        <label>Contraseña Temporal</label>
+        <label>Contraseña Asignada</label>
         <input type="password" id="log-pass" placeholder="••••••••••" required>
       </div>
-      <button type="submit" class="btn-submit" style="margin-top: 15px;">Acceder al Formulario</button>
+      <div id="login-error" class="error-msg">Boleta o contraseña incorrecta. Verifica tus accesos.</div>
+      <button type="submit" class="btn-submit" style="margin-top: 15px;">Ingresar a la Plataforma</button>
     </form>
   </div>
 
-  <!-- VISTA 2: FORMULARIO COMPLETO -->
+  <!-- VISTA 2: FORMULARIO OFICIAL -->
   <div class="container" id="app-form" style="display: none;">
     <div class="card">
-      <div style="background: #E8F4FD; border-left: 4px solid #1976D2; padding: 12px; margin-bottom: 20px; font-size: 0.9rem;">
-        Bienvenido(a), <strong id="student-name"></strong>. Revisa tus datos y completa los campos obligatorios para el trámite del estímulo económico.
+      <div class="alert-banner">
+        ¡Felicidades, <strong id="student-name"></strong>! Estás registrado como candidato por la carrera <strong id="student-career"></strong>. Completa tus datos para procesar tu expediente y el depósito del premio.
       </div>
 
       <form id="registro-excelencia" onsubmit="handleSubmit(event)">
         
-        <!-- DATOS PERSONALES -->
-        <div class="section-title">1. Datos de Identificación</div>
+        <!-- 1. IDENTIFICACIÓN -->
+        <div class="section-title"><span class="badge">1</span> Datos de Identificación</div>
         <div class="grid-3">
           <div class="form-group">
             <label>Apellido Paterno *</label>
@@ -104,13 +139,13 @@
             <input type="text" id="curp" maxlength="18" placeholder="18 caracteres" required style="text-transform: uppercase;">
           </div>
           <div class="form-group">
-            <label>RFC con Homoclave *</label>
+            <label>RFC *</label>
             <input type="text" id="rfc" maxlength="13" placeholder="13 caracteres" required style="text-transform: uppercase;">
           </div>
         </div>
 
-        <!-- DOMICILIO -->
-        <div class="section-title">2. Domicilio Actual</div>
+        <!-- 2. DOMICILIO -->
+        <div class="section-title"><span class="badge">2</span> Domicilio Particular</div>
         <div class="grid-4">
           <div class="form-group">
             <label>Calle *</label>
@@ -136,24 +171,24 @@
             <input type="text" id="municipio" required>
           </div>
           <div class="form-group">
-            <label>Código Postal *</label>
-            <input type="text" id="cp" maxlength="5" required>
+            <label>Codigo Postal *</label>
+            <input type="text" id="cp" maxlength="5" pattern="[0-9]{5}" required>
           </div>
           <div class="form-group">
-            <label>País *</label>
+            <label>Pais *</label>
             <input type="text" id="pais" value="México" required>
           </div>
         </div>
 
-        <!-- CONTACTO -->
-        <div class="section-title">3. Medios de Contacto</div>
+        <!-- 3. CONTACTO -->
+        <div class="section-title"><span class="badge">3</span> Datos de Contacto</div>
         <div class="grid-3">
           <div class="form-group">
             <label>Número de teléfono celular *</label>
-            <input type="tel" id="telefono" maxlength="10" placeholder="10 dígitos" required>
+            <input type="tel" id="telefono" maxlength="10" placeholder="10 dígitos" required pattern="[0-9]{10}">
           </div>
           <div class="form-group">
-            <label>Compañía telefónica *</label>
+            <label>Compañía *</label>
             <select id="compania" required>
               <option value="">Seleccione...</option>
               <option value="Telcel">Telcel</option>
@@ -168,8 +203,8 @@
           </div>
         </div>
 
-        <!-- DATOS BANCARIOS -->
-        <div class="section-title">4. Datos Bancarios (Para Dispersión de Beca / Premio)</div>
+        <!-- 4. DATOS BANCARIOS -->
+        <div class="section-title"><span class="badge">4</span> Datos Bancarios (Para Depósito del Estímulo)</div>
         <div class="grid-3">
           <div class="form-group">
             <label>Banco *</label>
@@ -181,73 +216,498 @@
               <option value="Citibanamex">Citibanamex</option>
               <option value="Scotiabank">Scotiabank</option>
               <option value="Banco Azteca">Banco Azteca</option>
-              <option value="Otro">Otro</option>
+              <option value="Otro">Otro Banco</option>
             </select>
           </div>
           <div class="form-group">
             <label>Sucursal *</label>
-            <input type="text" id="sucursal" placeholder="Ej. 0123 / Centro Histórico" required>
+            <input type="text" id="sucursal" placeholder="Ej. 0124 Santo Tomás" required>
           </div>
           <div class="form-group">
-            <label>Cuenta CLABE (18 dígitos) *</label>
-            <input type="text" id="clabe" maxlength="18" placeholder="18 dígitos numéricos" required>
+            <label>Cuenta clabe *</label>
+            <input type="text" id="clabe" maxlength="18" pattern="[0-9]{18}" placeholder="18 dígitos" required>
           </div>
         </div>
 
-        <!-- CARGA DE DOCUMENTACIÓN -->
-        <div class="section-title">5. Carga de Documentación Probatoria (PDF o Imagen legible)</div>
+        <!-- 5. ARCHIVOS -->
+        <div class="section-title"><span class="badge">5</span> Carga de Documentación Oficial (PDF o Imagen)</div>
         <div class="grid-3">
           <div class="form-group">
-            <label>Carátula de Estado de Cuenta *</label>
+            <label>Caratula estado de cuenta *</label>
             <div class="file-drop">
-              <input type="file" id="file_cuenta" accept=".pdf,.png,.jpg,.jpeg" required style="width: 100%;">
-              <small style="color: #777; display:block; margin-top:5px;">Con CLABE y titular visible</small>
+              <input type="file" id="file_cuenta" accept=".pdf,.png,.jpg,.jpeg" required>
+              <small style="color: #718096; display:block; margin-top:6px;">Donde sea visible nombre y CLABE</small>
             </div>
           </div>
           <div class="form-group">
-            <label>Identificación Oficial (INE) *</label>
+            <label>INE / Identificación *</label>
             <div class="file-drop">
-              <input type="file" id="file_ine" accept=".pdf,.png,.jpg,.jpeg" required style="width: 100%;">
-              <small style="color: #777; display:block; margin-top:5px;">Ambos lados en un archivo</small>
+              <input type="file" id="file_ine" accept=".pdf,.png,.jpg,.jpeg" required>
+              <small style="color: #718096; display:block; margin-top:6px;">Ambos lados en un solo archivo</small>
             </div>
           </div>
           <div class="form-group">
             <label>Credencial del IPN *</label>
             <div class="file-drop">
-              <input type="file" id="file_credencial" accept=".pdf,.png,.jpg,.jpeg" required style="width: 100%;">
-              <small style="color: #777; display:block; margin-top:5px;">Vigente o con holograma</small>
+              <input type="file" id="file_credencial" accept=".pdf,.png,.jpg,.jpeg" required>
+              <small style="color: #718096; display:block; margin-top:6px;">Credencial vigente con holograma</small>
             </div>
           </div>
         </div>
 
-        <button type="submit" class="btn-submit">Guardar y Enviar Expediente</button>
+        <button type="submit" class="btn-submit">Guardar y Enviar Registro</button>
       </form>
     </div>
   </div>
 
   <script>
-    // Se cargan las credenciales generadas del listado de Excel
-    let sessionUser = null;
+    // Base de datos de alumnos autorizados con sus contraseñas
+    const ESTUDIANTES_VALIDOS = [
+  {
+    "No": 1,
+    "Carrera": "LMD",
+    "Programa Académico": "LICENCIATURA EN MERCADOTECNIA DIGITAL",
+    "Boleta / Usuario": "2025400051",
+    "Nombre(s)": "FATIMA",
+    "Apellido Paterno": "CASTAÑEDA",
+    "Apellido Materno": "GOMEZ",
+    "Promedio": 9.69,
+    "Semestre": 4,
+    "Contraseña Asignada": "@V4$XMuWlD",
+    "Correo Institucional (Sugerido)": "fatima.castaneda0051@alumno.ipn.mx"
+  },
+  {
+    "No": 2,
+    "Carrera": "LMD",
+    "Programa Académico": "LICENCIATURA EN MERCADOTECNIA DIGITAL",
+    "Boleta / Usuario": "2024401113",
+    "Nombre(s)": "LILIANA",
+    "Apellido Paterno": "MENDOZA",
+    "Apellido Materno": "CENDEJAS",
+    "Promedio": 9.79,
+    "Semestre": 6,
+    "Contraseña Asignada": "$7fNZgFO96",
+    "Correo Institucional (Sugerido)": "liliana.mendoza1113@alumno.ipn.mx"
+  },
+  {
+    "No": 3,
+    "Carrera": "LMD",
+    "Programa Académico": "LICENCIATURA EN MERCADOTECNIA DIGITAL",
+    "Boleta / Usuario": "2023401364",
+    "Nombre(s)": "MARIA JOSE",
+    "Apellido Paterno": "JIMENEZ",
+    "Apellido Materno": "RAMIREZ",
+    "Promedio": 9.82,
+    "Semestre": 8,
+    "Contraseña Asignada": "Aq4ezC7K#Y",
+    "Correo Institucional (Sugerido)": "maria.jimenez1364@alumno.ipn.mx"
+  },
+  {
+    "No": 4,
+    "Carrera": "LND",
+    "Programa Académico": "LICENCIATURA EN NEGOCIOS DIGITALES",
+    "Boleta / Usuario": "2026401369",
+    "Nombre(s)": "BELEN AURORA",
+    "Apellido Paterno": "PEÑA",
+    "Apellido Materno": "HERNANDEZ",
+    "Promedio": 9.57,
+    "Semestre": 2,
+    "Contraseña Asignada": "9$qR4KOi5j",
+    "Correo Institucional (Sugerido)": "belen.pena1369@alumno.ipn.mx"
+  },
+  {
+    "No": 5,
+    "Carrera": "LND",
+    "Programa Académico": "LICENCIATURA EN NEGOCIOS DIGITALES",
+    "Boleta / Usuario": "2026401403",
+    "Nombre(s)": "ALEJANDRO IMANOL",
+    "Apellido Paterno": "MALAGA",
+    "Apellido Materno": "JUAREZ",
+    "Promedio": 9.57,
+    "Semestre": 2,
+    "Contraseña Asignada": "b6L#SvzgK7",
+    "Correo Institucional (Sugerido)": "alejandro.malaga1403@alumno.ipn.mx"
+  },
+  {
+    "No": 6,
+    "Carrera": "LND",
+    "Programa Académico": "LICENCIATURA EN NEGOCIOS DIGITALES",
+    "Boleta / Usuario": "2024400781",
+    "Nombre(s)": "ARATH",
+    "Apellido Paterno": "BANDERAS",
+    "Apellido Materno": "HERNANDEZ",
+    "Promedio": 9.53,
+    "Semestre": 6,
+    "Contraseña Asignada": "$mlBC$mh3X",
+    "Correo Institucional (Sugerido)": "arath.banderas0781@alumno.ipn.mx"
+  },
+  {
+    "No": 7,
+    "Carrera": "LND",
+    "Programa Académico": "LICENCIATURA EN NEGOCIOS DIGITALES",
+    "Boleta / Usuario": "2023401224",
+    "Nombre(s)": "IVAN",
+    "Apellido Paterno": "HERNANDEZ",
+    "Apellido Materno": "CABRERA",
+    "Promedio": 9.67,
+    "Semestre": 8,
+    "Contraseña Asignada": "863282Xg$z",
+    "Correo Institucional (Sugerido)": "ivan.hernandez1224@alumno.ipn.mx"
+  },
+  {
+    "No": 8,
+    "Carrera": "LND",
+    "Programa Académico": "LICENCIATURA EN NEGOCIOS DIGITALES",
+    "Boleta / Usuario": "2023401784",
+    "Nombre(s)": "DAVID",
+    "Apellido Paterno": "RUIZ",
+    "Apellido Materno": "LOPEZ",
+    "Promedio": 9.67,
+    "Semestre": 8,
+    "Contraseña Asignada": "gdSm#I54iA",
+    "Correo Institucional (Sugerido)": "david.ruiz1784@alumno.ipn.mx"
+  },
+  {
+    "No": 9,
+    "Carrera": "LNI",
+    "Programa Académico": "NEGOCIOS INTERNACIONALES",
+    "Boleta / Usuario": "2026400698",
+    "Nombre(s)": "ARIAFNA GISELL",
+    "Apellido Paterno": "GONZALEZ",
+    "Apellido Materno": "PARDIÑAS",
+    "Promedio": 9.93,
+    "Semestre": 2,
+    "Contraseña Asignada": "s@p2TV7fzF",
+    "Correo Institucional (Sugerido)": "ariafna.gonzalez0698@alumno.ipn.mx"
+  },
+  {
+    "No": 10,
+    "Carrera": "LNI",
+    "Programa Académico": "NEGOCIOS INTERNACIONALES",
+    "Boleta / Usuario": "2026401148",
+    "Nombre(s)": "LUIS RUBEN",
+    "Apellido Paterno": "RODRIGUEZ",
+    "Apellido Materno": "DE JESUS",
+    "Promedio": 9.93,
+    "Semestre": 2,
+    "Contraseña Asignada": "7o$KsIXAZN",
+    "Correo Institucional (Sugerido)": "luis.rodriguez1148@alumno.ipn.mx"
+  },
+  {
+    "No": 11,
+    "Carrera": "LNI",
+    "Programa Académico": "NEGOCIOS INTERNACIONALES",
+    "Boleta / Usuario": "2026401191",
+    "Nombre(s)": "AINHOA VALENTINA",
+    "Apellido Paterno": "DOMINGUEZ",
+    "Apellido Materno": "SANZ",
+    "Promedio": 9.93,
+    "Semestre": 2,
+    "Contraseña Asignada": "4#aeTQaA0j",
+    "Correo Institucional (Sugerido)": "ainhoa.dominguez1191@alumno.ipn.mx"
+  },
+  {
+    "No": 12,
+    "Carrera": "LNI",
+    "Programa Académico": "NEGOCIOS INTERNACIONALES",
+    "Boleta / Usuario": "2025401214",
+    "Nombre(s)": "NATALY",
+    "Apellido Paterno": "GARCIA",
+    "Apellido Materno": "SANTILLAN",
+    "Promedio": 9.71,
+    "Semestre": 4,
+    "Contraseña Asignada": "$A1y7vgbD4",
+    "Correo Institucional (Sugerido)": "nataly.garcia1214@alumno.ipn.mx"
+  },
+  {
+    "No": 13,
+    "Carrera": "LNI",
+    "Programa Académico": "NEGOCIOS INTERNACIONALES",
+    "Boleta / Usuario": "2025401244",
+    "Nombre(s)": "MONICA",
+    "Apellido Paterno": "ZURITA",
+    "Apellido Materno": "BORJAS",
+    "Promedio": 9.71,
+    "Semestre": 4,
+    "Contraseña Asignada": "fiqWYx@j94",
+    "Correo Institucional (Sugerido)": "monica.zurita1244@alumno.ipn.mx"
+  },
+  {
+    "No": 14,
+    "Carrera": "LNI",
+    "Programa Académico": "NEGOCIOS INTERNACIONALES",
+    "Boleta / Usuario": "2024400055",
+    "Nombre(s)": "PAMELA",
+    "Apellido Paterno": "BECERRA",
+    "Apellido Materno": "FLORES",
+    "Promedio": 9.78,
+    "Semestre": 6,
+    "Contraseña Asignada": "Cr$BX7IRTj",
+    "Correo Institucional (Sugerido)": "pamela.becerra0055@alumno.ipn.mx"
+  },
+  {
+    "No": 15,
+    "Carrera": "LNI",
+    "Programa Académico": "NEGOCIOS INTERNACIONALES",
+    "Boleta / Usuario": "2022440193",
+    "Nombre(s)": "CHRISTIAN LUCIANO",
+    "Apellido Paterno": "GARCIA",
+    "Apellido Materno": "CAZAÑAS",
+    "Promedio": 9.72,
+    "Semestre": 8,
+    "Contraseña Asignada": "YnDa@34LSG",
+    "Correo Institucional (Sugerido)": "christian.garcia0193@alumno.ipn.mx"
+  },
+  {
+    "No": 16,
+    "Carrera": "LRC",
+    "Programa Académico": "RELACIONES COMERCIALES",
+    "Boleta / Usuario": "2026400820",
+    "Nombre(s)": "BRUCE EFRAIN",
+    "Apellido Paterno": "MERINO",
+    "Apellido Materno": "SANTOS",
+    "Promedio": 9.79,
+    "Semestre": 2,
+    "Contraseña Asignada": "15Q#ZKJsP3",
+    "Correo Institucional (Sugerido)": "bruce.merino0820@alumno.ipn.mx"
+  },
+  {
+    "No": 17,
+    "Carrera": "LRC",
+    "Programa Académico": "RELACIONES COMERCIALES",
+    "Boleta / Usuario": "2025400843",
+    "Nombre(s)": "LEONARDO",
+    "Apellido Paterno": "GARCIA",
+    "Apellido Materno": "MONROY",
+    "Promedio": 9.89,
+    "Semestre": 4,
+    "Contraseña Asignada": "p@GgQlf4nX",
+    "Correo Institucional (Sugerido)": "leonardo.garcia0843@alumno.ipn.mx"
+  },
+  {
+    "No": 18,
+    "Carrera": "LRC",
+    "Programa Académico": "RELACIONES COMERCIALES",
+    "Boleta / Usuario": "2024400369",
+    "Nombre(s)": "DANIELA",
+    "Apellido Paterno": "RUIZ",
+    "Apellido Materno": "AVILES",
+    "Promedio": 9.9,
+    "Semestre": 6,
+    "Contraseña Asignada": "EI0zMuf#qv",
+    "Correo Institucional (Sugerido)": "daniela.ruiz0369@alumno.ipn.mx"
+  },
+  {
+    "No": 19,
+    "Carrera": "LRC",
+    "Programa Académico": "RELACIONES COMERCIALES",
+    "Boleta / Usuario": "2023400592",
+    "Nombre(s)": "SURIH ZOE",
+    "Apellido Paterno": "SANCHEZ",
+    "Apellido Materno": "CORONA",
+    "Promedio": 9.69,
+    "Semestre": 8,
+    "Contraseña Asignada": "z5@mq0HXZp",
+    "Correo Institucional (Sugerido)": "surih.sanchez0592@alumno.ipn.mx"
+  },
+  {
+    "No": 20,
+    "Carrera": "LRC",
+    "Programa Académico": "RELACIONES COMERCIALES",
+    "Boleta / Usuario": "2023400650",
+    "Nombre(s)": "PATRICIA RENEE",
+    "Apellido Paterno": "JIMENEZ",
+    "Apellido Materno": "LABUHN",
+    "Promedio": 9.69,
+    "Semestre": 8,
+    "Contraseña Asignada": "wwnZxMd#3m",
+    "Correo Institucional (Sugerido)": "patricia.jimenez0650@alumno.ipn.mx"
+  },
+  {
+    "No": 21,
+    "Carrera": "CP",
+    "Programa Académico": "CONTADOR PÚBLICO",
+    "Boleta / Usuario": "2026400335",
+    "Nombre(s)": "SHARON",
+    "Apellido Paterno": "NAVA",
+    "Apellido Materno": "GRANADOS",
+    "Promedio": 9.71,
+    "Semestre": 2,
+    "Contraseña Asignada": "#169BqdAOl",
+    "Correo Institucional (Sugerido)": "sharon.nava0335@alumno.ipn.mx"
+  },
+  {
+    "No": 22,
+    "Carrera": "CP",
+    "Programa Académico": "CONTADOR PÚBLICO",
+    "Boleta / Usuario": "2026400143",
+    "Nombre(s)": "ISAAC JARED",
+    "Apellido Paterno": "MEZA",
+    "Apellido Materno": "ACEVEDO",
+    "Promedio": 9.71,
+    "Semestre": 2,
+    "Contraseña Asignada": "I3$sqCGKo3",
+    "Correo Institucional (Sugerido)": "isaac.meza0143@alumno.ipn.mx"
+  },
+  {
+    "No": 23,
+    "Carrera": "CP",
+    "Programa Académico": "CONTADOR PÚBLICO",
+    "Boleta / Usuario": "2025400353",
+    "Nombre(s)": "MARIA FERNANDA",
+    "Apellido Paterno": "GUTIERREZ",
+    "Apellido Materno": "ENRIQUEZ",
+    "Promedio": 9.82,
+    "Semestre": 4,
+    "Contraseña Asignada": "$@O0mWLXjR",
+    "Correo Institucional (Sugerido)": "maria.gutierrez0353@alumno.ipn.mx"
+  },
+  {
+    "No": 24,
+    "Carrera": "CP",
+    "Programa Académico": "CONTADOR PÚBLICO",
+    "Boleta / Usuario": "2024400068",
+    "Nombre(s)": "GIOVANNA",
+    "Apellido Paterno": "FLORES",
+    "Apellido Materno": "HERRERA",
+    "Promedio": 9.9,
+    "Semestre": 6,
+    "Contraseña Asignada": "XLYMheuv$8",
+    "Correo Institucional (Sugerido)": "giovanna.flores0068@alumno.ipn.mx"
+  },
+  {
+    "No": 25,
+    "Carrera": "CP",
+    "Programa Académico": "CONTADOR PÚBLICO",
+    "Boleta / Usuario": "2023400440",
+    "Nombre(s)": "BERENICE VALERIA",
+    "Apellido Paterno": "VIDAL",
+    "Apellido Materno": "ORTEGA",
+    "Promedio": 9.63,
+    "Semestre": 8,
+    "Contraseña Asignada": "y8nQe@3aLJ",
+    "Correo Institucional (Sugerido)": "berenice.vidal0440@alumno.ipn.mx"
+  },
+  {
+    "No": 26,
+    "Carrera": "LADE",
+    "Programa Académico": "ADMINISTRACIÓN Y DESARROLLO EMPRESARIAL",
+    "Boleta / Usuario": "2026401275",
+    "Nombre(s)": "FERNANDO",
+    "Apellido Paterno": "SANCHEZ",
+    "Apellido Materno": "SALGADO",
+    "Promedio": 9.64,
+    "Semestre": 2,
+    "Contraseña Asignada": "kGq$WhWEN9",
+    "Correo Institucional (Sugerido)": "fernando.sanchez1275@alumno.ipn.mx"
+  },
+  {
+    "No": 27,
+    "Carrera": "LADE",
+    "Programa Académico": "ADMINISTRACIÓN Y DESARROLLO EMPRESARIAL",
+    "Boleta / Usuario": "2026401337",
+    "Nombre(s)": "LIDIA",
+    "Apellido Paterno": "MARTINEZ",
+    "Apellido Materno": "SANCHEZ",
+    "Promedio": 9.64,
+    "Semestre": 2,
+    "Contraseña Asignada": "zNjA69k@sS",
+    "Correo Institucional (Sugerido)": "lidia.martinez1337@alumno.ipn.mx"
+  },
+  {
+    "No": 28,
+    "Carrera": "LADE",
+    "Programa Académico": "ADMINISTRACIÓN Y DESARROLLO EMPRESARIAL",
+    "Boleta / Usuario": "2025400046",
+    "Nombre(s)": "SOFIA",
+    "Apellido Paterno": "OLMEDO",
+    "Apellido Materno": "RIVERA",
+    "Promedio": 9.75,
+    "Semestre": 4,
+    "Contraseña Asignada": "#gG5ibC61E",
+    "Correo Institucional (Sugerido)": "sofia.olmedo0046@alumno.ipn.mx"
+  },
+  {
+    "No": 29,
+    "Carrera": "LADE",
+    "Programa Académico": "ADMINISTRACIÓN Y DESARROLLO EMPRESARIAL",
+    "Boleta / Usuario": "2025401363",
+    "Nombre(s)": "KARINA DANIELA",
+    "Apellido Paterno": "RODRIGUEZ",
+    "Apellido Materno": "LEAL",
+    "Promedio": 9.75,
+    "Semestre": 4,
+    "Contraseña Asignada": "wduuLm@L6$",
+    "Correo Institucional (Sugerido)": "karina.rodriguez1363@alumno.ipn.mx"
+  },
+  {
+    "No": 30,
+    "Carrera": "LADE",
+    "Programa Académico": "ADMINISTRACIÓN Y DESARROLLO EMPRESARIAL",
+    "Boleta / Usuario": "2024400549",
+    "Nombre(s)": "MICHELLE",
+    "Apellido Paterno": "PEREZ",
+    "Apellido Materno": "DE TERESA",
+    "Promedio": 9.68,
+    "Semestre": 6,
+    "Contraseña Asignada": "xaU4$W5wyo",
+    "Correo Institucional (Sugerido)": "michelle.perez0549@alumno.ipn.mx"
+  },
+  {
+    "No": 31,
+    "Carrera": "LADE",
+    "Programa Académico": "ADMINISTRACIÓN Y DESARROLLO EMPRESARIAL",
+    "Boleta / Usuario": "2023401331",
+    "Nombre(s)": "GLORIA HAYDEE",
+    "Apellido Paterno": "REBOLLO",
+    "Apellido Materno": "FLORES",
+    "Promedio": 9.7,
+    "Semestre": 8,
+    "Contraseña Asignada": "3eA#6gvY6S",
+    "Correo Institucional (Sugerido)": "gloria.rebollo1331@alumno.ipn.mx"
+  }
+];
+
+    let alumnoActual = null;
 
     function handleLogin(e) {
       e.preventDefault();
       const b = document.getElementById('log-boleta').value.trim();
       const p = document.getElementById('log-pass').value.trim();
-      
-      // Simulación de autenticación local con datos precargados
-      document.getElementById('login-box').style.display = 'none';
-      document.getElementById('app-form').style.display = 'block';
-      document.getElementById('student-name').innerText = 'Candidato Boleta ' + b;
+      const err = document.getElementById('login-error');
+
+      const match = ESTUDIANTES_VALIDOS.find(s => s["Boleta / Usuario"] === b && s["Contraseña Asignada"] === p);
+
+      if (match) {
+        err.style.display = 'none';
+        alumnoActual = match;
+        
+        // Precargar datos del alumno
+        document.getElementById('login-box').style.display = 'none';
+        document.getElementById('app-form').style.display = 'block';
+        document.getElementById('student-name').innerText = match["Nombre(s)"] + ' ' + match["Apellido Paterno"];
+        document.getElementById('student-career').innerText = match["Programa Académico"];
+
+        document.getElementById('paterno').value = match["Apellido Paterno"];
+        document.getElementById('materno').value = match["Apellido Materno"];
+        document.getElementById('nombres').value = match["Nombre(s)"];
+        document.getElementById('correo_inst').value = match["Correo Institucional (Sugerido)"];
+        
+        window.scrollTo(0,0);
+      } else {
+        err.style.display = 'block';
+      }
     }
 
     function handleSubmit(e) {
       e.preventDefault();
       const clabe = document.getElementById('clabe').value.trim();
       if (clabe.length !== 18 || isNaN(clabe)) {
-        alert("La Cuenta CLABE debe contener exactamente 18 dígitos numéricos.");
+        alert("Atención: La Cuenta CLABE debe contener exactamente 18 dígitos numéricos.");
         return;
       }
-      alert("¡Expediente guardado y enviado con éxito! Se ha generado tu comprobante de registro.");
+
+      alert("¡Expediente de " + alumnoActual["Nombre(s)"] + " registrado exitosamente! La documentación ha sido enviada a validación escolar.");
     }
   </script>
 </body>
