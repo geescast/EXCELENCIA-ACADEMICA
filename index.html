@@ -781,10 +781,15 @@
         document.getElementById('student-name').innerText = match["Nombre(s)"] + ' ' + match["Apellido Paterno"];
         document.getElementById('student-career').innerText = match["Programa Académico"];
 
-        document.getElementById('paterno').value = match["Apellido Paterno"];
-        document.getElementById('materno').value = match["Apellido Materno"];
-        document.getElementById('nombres').value = match["Nombre(s)"];
-        document.getElementById('correo_inst').value = match["Correo Institucional (Sugerido)"];
+        document.getElementById('paterno').value = match["Apellido Paterno"] || '';
+        document.getElementById('materno').value = match["Apellido Materno"] || '';
+        document.getElementById('nombres').value = match["Nombre(s)"] || '';
+        document.getElementById('curp').value = match["CURP"] || '';
+        if (match["CURP"] && match["CURP"].length >= 10) {
+          document.getElementById('rfc').value = match["CURP"].substring(0, 10);
+        }
+        document.getElementById('telefono').value = match["Teléfono Móvil"] || '';
+        document.getElementById('correo_inst').value = match["Correo Oficial"] || match["Correo Institucional (Sugerido)"] || '';
         
         window.scrollTo(0,0);
       } else {
@@ -792,15 +797,86 @@
       }
     }
 
-    function handleSubmit(e) {
+        const URL_WEB_APP = "https://script.google.com/macros/s/AKfycbytEuohE4dECScKtoELxVakgeF8ZA2hCbB9d5zGbzIY6eLE9JEmKf2-Rih95-CYyhND/exec";
+
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        if (!file) {
+          resolve(null);
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = () => resolve({
+          nombre: file.name,
+          tipo: file.type,
+          base64: reader.result
+        });
+        reader.onerror = error => reject(error);
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function handleSubmit(e) {
       e.preventDefault();
+      
       const clabe = document.getElementById('clabe').value.trim();
       if (clabe.length !== 18 || isNaN(clabe)) {
         alert("Atención: La Cuenta CLABE debe contener exactamente 18 dígitos numéricos.");
         return;
       }
 
-      alert("¡Expediente de " + alumnoActual["Nombre(s)"] + " registrado exitosamente! La documentación ha sido enviada a validación escolar.");
+      const btn = document.querySelector('.btn-submit');
+      const textoOriginal = btn.innerText;
+      btn.disabled = true;
+      btn.innerText = "⏳ Subiendo documentación y guardando registro... por favor espera.";
+
+      try {
+        const fileCuenta = await fileToBase64(document.getElementById('file_cuenta').files[0]);
+        const fileIne = await fileToBase64(document.getElementById('file_ine').files[0]);
+        const fileCred = await fileToBase64(document.getElementById('file_credencial').files[0]);
+
+        const payload = {
+          boleta: alumnoActual["Boleta / Usuario"],
+          programa: alumnoActual["Programa Académico"],
+          paterno: document.getElementById('paterno').value.trim(),
+          materno: document.getElementById('materno').value.trim(),
+          nombres: document.getElementById('nombres').value.trim(),
+          curp: document.getElementById('curp').value.trim().toUpperCase(),
+          rfc: document.getElementById('rfc').value.trim().toUpperCase(),
+          calle: document.getElementById('calle').value.trim(),
+          num_ext: document.getElementById('num_ext').value.trim(),
+          num_inter: document.getElementById('num_inter').value.trim(),
+          colonia: document.getElementById('colonia').value.trim(),
+          municipio: document.getElementById('municipio').value.trim(),
+          cp: document.getElementById('cp').value.trim(),
+          pais: document.getElementById('pais').value.trim(),
+          telefono: document.getElementById('telefono').value.trim(),
+          compania: document.getElementById('compania').value,
+          correo_inst: document.getElementById('correo_inst').value.trim(),
+          banco: document.getElementById('banco').value,
+          sucursal: document.getElementById('sucursal').value.trim(),
+          clabe: clabe,
+          file_cuenta: fileCuenta,
+          file_ine: fileIne,
+          file_credencial: fileCred
+        };
+
+        await fetch(URL_WEB_APP, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        alert("¡Expediente de " + alumnoActual["Nombre(s)"] + " recibido con éxito! Tus datos y documentos se han guardado correctamente.");
+        window.location.reload();
+
+      } catch (err) {
+        console.error(err);
+        alert("Ocurrió un inconveniente al enviar la información. Por favor verifica tu conexión y vuelve a intentarlo.");
+        btn.disabled = false;
+        btn.innerText = textoOriginal;
+      }
     }
   </script>
 </body>
