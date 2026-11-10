@@ -91,12 +91,12 @@
   <!-- VISTA 1: ACCESO -->
   <div id="login-box">
     <h2 style="color: var(--ipn-guinda); font-size: 1.3rem; margin-bottom: 6px;">Portal de Registro</h2>
-    <p style="font-size: 0.88rem; color: #718096; margin-bottom: 22px;">Ingresa con tu Boleta y la contraseña temporal enviada a tu correo institucional.</p>
+    <p style="font-size: 0.88rem; color: #718096; margin-bottom: 22px;">Ingresa con tu Boleta y la contraseña enviada a tu correo.</p>
     
     <form id="form-login" onsubmit="handleLogin(event)">
       <div class="form-group">
         <label>Número de Boleta</label>
-        <input type="text" id="log-boleta" placeholder="Ej. 2025400051" required maxlength="10">
+        <input type="text" id="log-boleta" placeholder="Ej. 2025400000" required maxlength="10">
       </div>
       <div class="form-group">
         <label>Contraseña Asignada</label>
@@ -111,7 +111,9 @@
   <div class="container" id="app-form" style="display: none;">
     <div class="card">
       <div class="alert-banner">
-        ¡Felicidades, <strong id="student-name"></strong>! ¡Felicidades por ser Ganador(a) por la carrera <strong id="student-career"></strong>. Completa tus datos para procesar tu expediente y el depósito del premio.
+        <p style="margin-bottom: 8px;">¡Felicidades, <strong id="student-name"></strong>! Has sido galardonado(a) como <strong>Ganador(a) del Premio a la Excelencia Académica 2026</strong> por el programa académico <strong><span id="student-career"></span></strong>.</p>
+        <p style="margin-bottom: 6px;">📌 <strong>Instrucciones:</strong> Por favor <strong>revisa cuidadosamente tus datos precargados</strong> y <strong>completa la información solicitada</strong> en cada una de las secciones, adjuntando tus archivos probatorios en formato legible.</p>
+        <p style="margin: 0; font-weight: 600; color: #1A365D;">ℹ️ <em>Nota importante:</em> Una vez que tu información y documentación sean validadas por el Departamento de Gestión Escolar, <strong>se te enviará un aviso por correo electrónico para que acudas a la oficina de Gestión Escolar a firmar el formato final</strong>.</p>
       </div>
 
       <form id="registro-excelencia" onsubmit="handleSubmit(event)">
@@ -140,7 +142,7 @@
           </div>
           <div class="form-group">
             <label>RFC *</label>
-            <input type="text" id="rfc" maxlength="13" placeholder="13 caracteres" required style="text-transform: uppercase;">
+            <input type="text" id="rfc" maxlength="13" placeholder="10 caracteres" required style="text-transform: uppercase;">
           </div>
         </div>
 
@@ -868,7 +870,7 @@
           body: JSON.stringify(payload)
         });
 
-        alert("¡Expediente de " + alumnoActual["Nombre(s)"] + " recibido con éxito! Tus datos y documentos se han guardado correctamente.");
+        alert("¡Expediente de " + alumnoActual["Nombre(s)"] + " recibido con éxito! Tus datos y documentos se han guardado correctamente.\n\nUna vez validados tus datos y documentos, se te enviará un aviso por correo electrónico para que acudas al Departamento de Gestión Escolar a firmar el formato final.");
         window.location.reload();
 
       } catch (err) {
