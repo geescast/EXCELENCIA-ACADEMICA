@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IPN - Registro de Excelencia Académica 2026</title>
+  <style>
+    :root {
+      --ipn-guinda: #6C1D45;
+      --ipn-guinda-dark: #4A122E;
+      --ipn-gold: #D4AF37;
+      --bg: #F8F9FA;
+    }
+    * { box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, sans-serif; margin: 0; padding: 0; }
+    body { background-color: var(--bg); color: #333; }
+    header {
+      background: linear-gradient(135deg, var(--ipn-guinda) 0%, var(--ipn-guinda-dark) 100%);
+      color: white; padding: 20px; text-align: center; border-bottom: 4px solid var(--ipn-gold);
+    }
+    header h1 { font-size: 1.4rem; letter-spacing: 0.5px; }
+    header p { font-size: 0.95rem; opacity: 0.9; margin-top: 5px; }
+    .container { max-width: 960px; margin: 30px auto; background: white; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); overflow: hidden; }
+    .card { padding: 30px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
+    .grid-4 { display: grid; grid-template-columns: 2fr 1fr 1fr 2fr; gap: 15px; }
+    .form-group { margin-bottom: 15px; display: flex; flex-direction: column; }
+    label { font-size: 0.82rem; font-weight: 700; color: #444; margin-bottom: 5px; text-transform: uppercase; }
+    input, select {
+      padding: 10px 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 0.95rem; transition: border-color 0.2s;
+    }
+    input:focus, select:focus { border-color: var(--ipn-guinda); outline: none; }
+    .section-title {
+      font-size: 1.05rem; font-weight: 700; color: var(--ipn-guinda); border-bottom: 2px solid #EEE;
+      padding-bottom: 8px; margin: 25px 0 15px 0; display: flex; align-items: center; gap: 8px;
+    }
+    .file-drop {
+      border: 2px dashed #BDBDBD; padding: 15px; border-radius: 6px; text-align: center;
+      background: #FAFAFA; cursor: pointer; transition: 0.2s;
+    }
+    .file-drop:hover { border-color: var(--ipn-guinda); background: #FFF5F8; }
+    .btn-submit {
+      background: var(--ipn-guinda); color: white; border: none; padding: 14px 28px;
+      font-size: 1rem; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%;
+      margin-top: 25px; transition: background 0.2s;
+    }
+    .btn-submit:hover { background: var(--ipn-guinda-dark); }
+    #login-box { max-width: 420px; margin: 60px auto; padding: 35px; border-radius: 8px; background: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>INSTITUTO POLITÉCNICO NACIONAL</h1>
+    <p>Portal de Registro para Personas Candidatas al Premio a la Excelencia Académica 2026</p>
+  </header>
+
+  <!-- VISTA 1: LOGIN -->
+  <div id="login-box">
+    <h2 style="color: var(--ipn-guinda); font-size: 1.25rem; margin-bottom: 8px;">Iniciar Sesión</h2>
+    <p style="font-size: 0.85rem; color: #666; margin-bottom: 20px;">Ingresa con tu Boleta y la contraseña temporal enviada a tu correo.</p>
+    <form id="form-login" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label>No. de Boleta</label>
+        <input type="text" id="log-boleta" placeholder="Ej. 2025400051" required maxlength="10">
+      </div>
+      <div class="form-group">
+        <label>Contraseña Temporal</label>
+        <input type="password" id="log-pass" placeholder="••••••••••" required>
+      </div>
+      <button type="submit" class="btn-submit" style="margin-top: 15px;">Acceder al Formulario</button>
+    </form>
+  </div>
+
+  <!-- VISTA 2: FORMULARIO COMPLETO -->
+  <div class="container" id="app-form" style="display: none;">
+    <div class="card">
+      <div style="background: #E8F4FD; border-left: 4px solid #1976D2; padding: 12px; margin-bottom: 20px; font-size: 0.9rem;">
+        Bienvenido(a), <strong id="student-name"></strong>. Revisa tus datos y completa los campos obligatorios para el trámite del estímulo económico.
+      </div>
+
+      <form id="registro-excelencia" onsubmit="handleSubmit(event)">
+        
+        <!-- DATOS PERSONALES -->
+        <div class="section-title">1. Datos de Identificación</div>
+        <div class="grid-3">
+          <div class="form-group">
+            <label>Apellido Paterno *</label>
+            <input type="text" id="paterno" required>
+          </div>
+          <div class="form-group">
+            <label>Apellido Materno *</label>
+            <input type="text" id="materno" required>
+          </div>
+          <div class="form-group">
+            <label>Nombre (s) *</label>
+            <input type="text" id="nombres" required>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label>CURP *</label>
+            <input type="text" id="curp" maxlength="18" placeholder="18 caracteres" required style="text-transform: uppercase;">
+          </div>
+          <div class="form-group">
+            <label>RFC con Homoclave *</label>
+            <input type="text" id="rfc" maxlength="13" placeholder="13 caracteres" required style="text-transform: uppercase;">
+          </div>
+        </div>
+
+        <!-- DOMICILIO -->
+        <div class="section-title">2. Domicilio Actual</div>
+        <div class="grid-4">
+          <div class="form-group">
+            <label>Calle *</label>
+            <input type="text" id="calle" required>
+          </div>
+          <div class="form-group">
+            <label>Num ext *</label>
+            <input type="text" id="num_ext" required>
+          </div>
+          <div class="form-group">
+            <label>Num inter</label>
+            <input type="text" id="num_inter" placeholder="Opcional">
+          </div>
+          <div class="form-group">
+            <label>Colonia *</label>
+            <input type="text" id="colonia" required>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="form-group">
+            <label>Alcaldía / Municipio *</label>
+            <input type="text" id="municipio" required>
+          </div>
+          <div class="form-group">
+            <label>Código Postal *</label>
+            <input type="text" id="cp" maxlength="5" required>
+          </div>
+          <div class="form-group">
+            <label>País *</label>
+            <input type="text" id="pais" value="México" required>
+          </div>
+        </div>
+
+        <!-- CONTACTO -->
+        <div class="section-title">3. Medios de Contacto</div>
+        <div class="grid-3">
+          <div class="form-group">
+            <label>Número de teléfono celular *</label>
+            <input type="tel" id="telefono" maxlength="10" placeholder="10 dígitos" required>
+          </div>
+          <div class="form-group">
+            <label>Compañía telefónica *</label>
+            <select id="compania" required>
+              <option value="">Seleccione...</option>
+              <option value="Telcel">Telcel</option>
+              <option value="AT&T">AT&T</option>
+              <option value="Movistar">Movistar</option>
+              <option value="Bait / OMV">Bait / Otra OMV</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Correo electrónico institucional *</label>
+            <input type="email" id="correo_inst" placeholder="@alumno.ipn.mx" required>
+          </div>
+        </div>
+
+        <!-- DATOS BANCARIOS -->
+        <div class="section-title">4. Datos Bancarios (Para Dispersión de Beca / Premio)</div>
+        <div class="grid-3">
+          <div class="form-group">
+            <label>Banco *</label>
+            <select id="banco" required>
+              <option value="">Seleccione Banco...</option>
+              <option value="BBVA México">BBVA México</option>
+              <option value="Banorte">Banorte</option>
+              <option value="Santander">Santander</option>
+              <option value="Citibanamex">Citibanamex</option>
+              <option value="Scotiabank">Scotiabank</option>
+              <option value="Banco Azteca">Banco Azteca</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Sucursal *</label>
+            <input type="text" id="sucursal" placeholder="Ej. 0123 / Centro Histórico" required>
+          </div>
+          <div class="form-group">
+            <label>Cuenta CLABE (18 dígitos) *</label>
+            <input type="text" id="clabe" maxlength="18" placeholder="18 dígitos numéricos" required>
+          </div>
+        </div>
+
+        <!-- CARGA DE DOCUMENTACIÓN -->
+        <div class="section-title">5. Carga de Documentación Probatoria (PDF o Imagen legible)</div>
+        <div class="grid-3">
+          <div class="form-group">
+            <label>Carátula de Estado de Cuenta *</label>
+            <div class="file-drop">
+              <input type="file" id="file_cuenta" accept=".pdf,.png,.jpg,.jpeg" required style="width: 100%;">
+              <small style="color: #777; display:block; margin-top:5px;">Con CLABE y titular visible</small>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Identificación Oficial (INE) *</label>
+            <div class="file-drop">
+              <input type="file" id="file_ine" accept=".pdf,.png,.jpg,.jpeg" required style="width: 100%;">
+              <small style="color: #777; display:block; margin-top:5px;">Ambos lados en un archivo</small>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Credencial del IPN *</label>
+            <div class="file-drop">
+              <input type="file" id="file_credencial" accept=".pdf,.png,.jpg,.jpeg" required style="width: 100%;">
+              <small style="color: #777; display:block; margin-top:5px;">Vigente o con holograma</small>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Guardar y Enviar Expediente</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Se cargan las credenciales generadas del listado de Excel
+    let sessionUser = null;
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const b = document.getElementById('log-boleta').value.trim();
+      const p = document.getElementById('log-pass').value.trim();
+      
+      // Simulación de autenticación local con datos precargados
+      document.getElementById('login-box').style.display = 'none';
+      document.getElementById('app-form').style.display = 'block';
+      document.getElementById('student-name').innerText = 'Candidato Boleta ' + b;
+    }
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      const clabe = document.getElementById('clabe').value.trim();
+      if (clabe.length !== 18 || isNaN(clabe)) {
+        alert("La Cuenta CLABE debe contener exactamente 18 dígitos numéricos.");
+        return;
+      }
+      alert("¡Expediente guardado y enviado con éxito! Se ha generado tu comprobante de registro.");
+    }
+  </script>
+</body>
+</html>
